@@ -1,19 +1,26 @@
 #include "stm32f10x.h"                  // Device header
 #include "OLED.h"
-#include "LED.h"
 #include "Delay.h"
+#include "Timer.h"
+
+uint16_t num=0;
 
 int main(){
-	LED_Init();
+	Timer_Init();
 	OLED_Init();
 	OLED_ShowString(1,1,"WTF");
-
+	OLED_ShowNum(2,1,num,5);
 	while(1){
-		LED_ON();
-		Delay_ms(500);
-		LED_OFF();
-		Delay_ms(500);
-		
+		OLED_ShowNum(2,1,num,5);
 	}
+
+
 }
 
+
+void TIM1_UP_IRQHandler(void){
+	if(TIM_GetFlagStatus(TIM1,TIM_FLAG_Update)==SET){
+		num++;
+		TIM_ClearITPendingBit(TIM1,TIM_FLAG_Update);
+	}
+}
