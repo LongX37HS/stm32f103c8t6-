@@ -15,8 +15,8 @@ void MPU6050_WriteData(uint8_t RegAddress,uint8_t Data){
 	MyIIC_Stop();
 }
 
-uint8_t MPU6050_ReadData(uint8_t RegAddress){
-	uint8_t Byte;
+void MPU6050_ReadDatas(uint8_t RegAddress,uint8_t* Array,uint8_t count){
+	uint8_t i=0;
 	MyIIC_Start();
 	MyIIC_SendByte(MPU6050_ADDRESS);
 	MyIIC_ReceiveAck();
@@ -26,10 +26,16 @@ uint8_t MPU6050_ReadData(uint8_t RegAddress){
 	MyIIC_Start();
 	MyIIC_SendByte(MPU6050_ADDRESS|0x01);
 	MyIIC_ReceiveAck();
-	Byte=MyIIC_ReceiveByte();
-	MyIIC_SendAck(1);
+	for (i=0;i<count;i++){
+		Array[i]=MyIIC_ReceiveByte();
+		if(i<count-1){
+			MyIIC_SendAck(0);
+		}else{
+			MyIIC_SendAck(1);
+		}
+		
+	}
 	MyIIC_Stop();
-	return Byte;
 }
 
 void MPU6050_Init(void){
@@ -42,36 +48,26 @@ void MPU6050_Init(void){
 	MPU6050_WriteData(MPU6050_ACCEL_CONFIG,0x18);
 }
 
-uint8_t MPU6050_GetID(void){
-	return MPU6050_ReadData(MPU6050_WHO_AM_I);
-}
+//uint8_t MPU6050_GetID(void){
+//	return MPU6050_ReadData(MPU6050_WHO_AM_I);
+//}
 
 void MPU6050_GetData(int16_t *ACCEL_XOUT,int16_t *ACCEL_YOUT,int16_t *ACCEL_ZOUT,
 						int16_t *GYRO_XOUT,int16_t *GYRO_YOUT,int16_t *GYRO_ZOUT){
-	uint8_t DataL;
-	uint8_t DataH;
-	DataH = MPU6050_ReadData(MPU6050_ACCEL_XOUT_H);		//??????X???8???
-	DataL = MPU6050_ReadData(MPU6050_ACCEL_XOUT_L);		//??????X???8???
-	*ACCEL_XOUT = (DataH << 8) | DataL;						//????,????????
 	
-	DataH = MPU6050_ReadData(MPU6050_ACCEL_YOUT_H);		//??????Y???8???
-	DataL = MPU6050_ReadData(MPU6050_ACCEL_YOUT_L);		//??????Y???8???
-	*ACCEL_YOUT = (DataH << 8) | DataL;						//????,????????
+	uint8_t Data[14];
+	MPU6050_ReadDatas(MPU6050_ACCEL_XOUT_H,Data,14);	//读取从ACCEL_XOUT开始的连续14个字节的数据					
+
+	*ACCEL_XOUT = (Data[0]<<8)|Data[1];			
 	
-	DataH = MPU6050_ReadData(MPU6050_ACCEL_ZOUT_H);		//??????Z???8???
-	DataL = MPU6050_ReadData(MPU6050_ACCEL_ZOUT_L);		//??????Z???8???
-	*ACCEL_ZOUT = (DataH << 8) | DataL;						//????,????????
+	*ACCEL_YOUT = (Data[2]<<8)|Data[3];				
 	
-	DataH = MPU6050_ReadData(MPU6050_GYRO_XOUT_H);		//?????X???8???
-	DataL = MPU6050_ReadData(MPU6050_GYRO_XOUT_L);		//?????X???8???
-	*GYRO_XOUT = (DataH << 8) | DataL;						//????,????????
-	
-	DataH = MPU6050_ReadData(MPU6050_GYRO_YOUT_H);		//?????Y???8???
-	DataL = MPU6050_ReadData(MPU6050_GYRO_YOUT_L);		//?????Y???8???
-	*GYRO_YOUT = (DataH << 8) | DataL;						//????,????????
-	
-	DataH = MPU6050_ReadData(MPU6050_GYRO_ZOUT_H);		//?????Z???8???
-	DataL = MPU6050_ReadData(MPU6050_GYRO_ZOUT_L);		//?????Z???8???
-	*GYRO_ZOUT = (DataH << 8) | DataL;		
+	*ACCEL_ZOUT = (Data[4]<<8)|Data[5];				
+
+	*GYRO_XOUT = (Data[8]<<8)|Data[9];			
+
+	*GYRO_YOUT = (Data[10]<<8)|Data[11];			
+
+	*GYRO_ZOUT = (Data[12]<<8)|Data[13];	
 }
 

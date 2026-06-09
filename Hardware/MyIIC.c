@@ -1,21 +1,17 @@
 #include "stm32f10x.h"                  // Device header
-#include "Delay.h"
 
 void MyIIC_W_SCL(uint8_t BitValue){
 	GPIO_WriteBit(GPIOB,GPIO_Pin_4,(BitAction)BitValue);
-	Delay_us(10);
 }
 
 void MyIIC_W_SDA(uint8_t BitValue){
 	GPIO_WriteBit(GPIOB,GPIO_Pin_3,(BitAction)BitValue);
-	Delay_us(10);
 
 }
 
 uint8_t MyIIC_R_SDA(void){
 	uint8_t BitValue;
 	BitValue=GPIO_ReadInputDataBit(GPIOB,GPIO_Pin_3);
-	Delay_us(10);
 	return BitValue;
 }
 
