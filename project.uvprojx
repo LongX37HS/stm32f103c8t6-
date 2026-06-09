@@ -134,11 +134,11 @@
             <RunIndependent>0</RunIndependent>
             <UpdateFlashBeforeDebugging>1</UpdateFlashBeforeDebugging>
             <Capability>1</Capability>
-            <DriverSelection>-1</DriverSelection>
+            <DriverSelection>4101</DriverSelection>
           </Flash1>
           <bUseTDR>1</bUseTDR>
-          <Flash2>BIN\UL2CM3.DLL</Flash2>
-          <Flash3></Flash3>
+          <Flash2>STLink\ST-LINKIII-KEIL_SWO.dll</Flash2>
+          <Flash3>"" ()</Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
           <pFcarmGrp></pFcarmGrp>
@@ -702,6 +702,31 @@
               <FileName>LED.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Hardware\LED.h</FilePath>
+            </File>
+            <File>
+              <FileName>MPU6050.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\MPU6050.c</FilePath>
+            </File>
+            <File>
+              <FileName>MPU6050.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\MPU6050.h</FilePath>
+            </File>
+            <File>
+              <FileName>MPU6050_REG.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\MPU6050_REG.h</FilePath>
+            </File>
+            <File>
+              <FileName>MyIIC.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\MyIIC.c</FilePath>
+            </File>
+            <File>
+              <FileName>MyIIC.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\MyIIC.h</FilePath>
             </File>
           </Files>
         </Group>

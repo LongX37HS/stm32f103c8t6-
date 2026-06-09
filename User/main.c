@@ -1,26 +1,30 @@
 #include "stm32f10x.h"                  // Device header
 #include "OLED.h"
-#include "Delay.h"
-#include "Timer.h"
+#include "MPU6050.h"
 
-uint16_t num=0;
-
+int16_t Ax,Az,Ay,Gx,Gz,Gy;
+uint8_t Ack=1;
 int main(){
-	Timer_Init();
+	MPU6050_Init();
 	OLED_Init();
-	OLED_ShowString(1,1,"WTF");
-	OLED_ShowNum(2,1,num,5);
 	while(1){
-		OLED_ShowNum(2,1,num,5);
+		MPU6050_GetData(&Ax,&Az,&Ay,&Gx,&Gz,&Gy);
+		OLED_ShowSignedNum(1,1,Ax,5);
+		OLED_ShowSignedNum(2,1,Az,5);
+		OLED_ShowSignedNum(3,1,Ay,5);
+		OLED_ShowSignedNum(1,8,Gx,5);
+		OLED_ShowSignedNum(2,8,Gz,5);
+		OLED_ShowSignedNum(3,8,Gy,5);
+		
 	}
 
 
 }
 
 
-void TIM1_UP_IRQHandler(void){
-	if(TIM_GetFlagStatus(TIM1,TIM_FLAG_Update)==SET){
-		num++;
-		TIM_ClearITPendingBit(TIM1,TIM_FLAG_Update);
-	}
-}
+//void TIM1_UP_IRQHandler(void){
+//	if(TIM_GetFlagStatus(TIM1,TIM_FLAG_Update)==SET){
+//		
+//		TIM_ClearITPendingBit(TIM1,TIM_FLAG_Update);
+//	}
+//}
