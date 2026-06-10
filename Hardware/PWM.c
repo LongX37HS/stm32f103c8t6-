@@ -1,0 +1,5 @@
+#include "stm32f10x.h"                  // Device header
+
+void PWM_Init(void){
+//	RCC_APB1PeriphClockCmd
+}
