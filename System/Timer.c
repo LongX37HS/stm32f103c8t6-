@@ -7,8 +7,9 @@ void Timer_Init(void){
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM1,ENABLE);
 	TIM_TimeBaseInitStructure.TIM_ClockDivision=TIM_CKD_DIV1;
 	TIM_TimeBaseInitStructure.TIM_CounterMode=TIM_CounterMode_Up;
-	TIM_TimeBaseInitStructure.TIM_Period=72-1;
-	TIM_TimeBaseInitStructure.TIM_Prescaler=1000-1;
+	TIM_TimeBaseInitStructure.TIM_Prescaler=100-1;	//72000000/100=720khz
+	TIM_TimeBaseInitStructure.TIM_Period=720-1;//720k/720=1000hz=1ms
+
 	TIM_TimeBaseInitStructure.TIM_RepetitionCounter=0;
 	
 	TIM_TimeBaseInit(TIM1,&TIM_TimeBaseInitStructure);
