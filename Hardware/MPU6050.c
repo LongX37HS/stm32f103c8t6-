@@ -49,7 +49,7 @@ void MPU6050_Init(void){
 }
 
 //uint8_t MPU6050_GetID(void){
-//	return MPU6050_ReadData(MPU6050_WHO_AM_I);
+//	return MPU6050_ReadDatas(MPU6050_WHO_AM_I,1);
 //}
 
 void MPU6050_GetData(int16_t *ACCEL_XOUT,int16_t *ACCEL_YOUT,int16_t *ACCEL_ZOUT,
