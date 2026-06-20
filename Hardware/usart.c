@@ -139,14 +139,14 @@ void MyUSART_Printf(char *format, ...)
 	MyUSART_SendString(String);		//串口发送字符数组（字符串）
 }
 
-void USART3_IRQHandler(void)
-{
-	if (USART_GetITStatus(USART3, USART_IT_RXNE) == SET)		//判断是否是USART1的接收事件触发的中断
-	{
-		MyUSART_RxData = USART_ReceiveData(USART3);				//读取数据寄存器，存放在接收的数据变量
-		MyUSART_RxFlag = 1;										//置接收标志位变量为1
-		USART_ClearITPendingBit(USART3, USART_IT_RXNE);			//清除USART1的RXNE标志位
-																//读取数据寄存器会自动清除此标志位
-																	//如果已经读取了数据寄存器，也可以不执行此代码
-	}
-}
+//void USART3_IRQHandler(void)
+//{
+//	if (USART_GetITStatus(USART3, USART_IT_RXNE) == SET)		//判断是否是USART1的接收事件触发的中断
+//	{
+//		MyUSART_RxData = USART_ReceiveData(USART3);				//读取数据寄存器，存放在接收的数据变量
+//		MyUSART_RxFlag = 1;										//置接收标志位变量为1
+//		USART_ClearITPendingBit(USART3, USART_IT_RXNE);			//清除USART1的RXNE标志位
+//																//读取数据寄存器会自动清除此标志位
+//																	//如果已经读取了数据寄存器，也可以不执行此代码
+//	}
+//}

@@ -53,7 +53,7 @@ void Encoder_Init(void){
 	TIM_Cmd(TIM4,ENABLE);	
 }
 
-int16_t Encoder_GetCounter1(void){
+int16_t Encoder_GetCounterL(void){
 	uint16_t temp=0;
 	temp=TIM_GetCounter(TIM2);
 	TIM_SetCounter(TIM2,0);
@@ -61,7 +61,7 @@ int16_t Encoder_GetCounter1(void){
 	
 }
 
-int16_t Encoder_GetCounter2(void){
+int16_t Encoder_GetCounterR(void){
 	uint16_t temp=0;
 	temp=TIM_GetCounter(TIM4);
 	TIM_SetCounter(TIM4,0);

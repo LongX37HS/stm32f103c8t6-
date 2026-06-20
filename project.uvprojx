@@ -325,7 +325,7 @@
             <wLevel>2</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
-            <uC99>0</uC99>
+            <uC99>1</uC99>
             <uGnu>0</uGnu>
             <useXO>0</useXO>
             <v6Lang>3</v6Lang>
@@ -673,6 +673,16 @@
               <FileType>5</FileType>
               <FilePath>.\User\stm32f10x_it.h</FilePath>
             </File>
+            <File>
+              <FileName>PID.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\User\PID.c</FilePath>
+            </File>
+            <File>
+              <FileName>PID.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\User\PID.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -767,6 +777,16 @@
               <FileName>Encoder.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Hardware\Encoder.h</FilePath>
+            </File>
+            <File>
+              <FileName>BlueSerial.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\BlueSerial.c</FilePath>
+            </File>
+            <File>
+              <FileName>BlueSerial.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Hardware\BlueSerial.h</FilePath>
             </File>
           </Files>
         </Group>
